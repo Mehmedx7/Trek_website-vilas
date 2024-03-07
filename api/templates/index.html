@@ -162,14 +162,12 @@
       -->
 
       <section class="hero" id="home">
+        {% for header in header_object %}
         <div class="container">
-
-          <h2 class="h1 hero-title">Journey to explore world</h2>
+          <h2 class="h1 hero-title">{{header.title}}</h2>
 
           <p class="hero-text">
-            Ac mi duis mollis. Sapiente? Scelerisque quae, penatibus? Suscipit class corporis nostra rem quos
-            voluptatibus habitant?
-            Fames, vivamus minim nemo enim, gravida lobortis quasi, eum.
+            {{header.sub_title}}
           </p>
 
           <div class="btn-group">
@@ -179,6 +177,7 @@
           </div>
 
         </div>
+        {% endfor %}
       </section>
 
 
@@ -201,107 +200,43 @@
 
           <ul class="popular-list">
 
+            {% for popular_destination in popular_destination_object %}
             <li>
               <div class="popular-card">
 
                 <figure class="card-img">
-                  <img src={% static "/assets/images/popular-1.jpg" %} alt="San miguel, italy" loading="lazy">
+                  <img src={{popular_destination.image.url}} alt="San miguel, italy" loading="lazy">
                 </figure>
 
                 <div class="card-content">
 
                   <div class="card-rating">
+                    {% if popular_destination.stars == 5 %}
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star"></ion-icon>
+                    {% endif %}
                   </div>
 
                   <p class="card-subtitle">
-                    <a href="#">Italy</a>
+                    <a href="#">{{popular_destination.city}}</a>
                   </p>
 
                   <h3 class="h3 card-title">
-                    <a href="#">San miguel</a>
+                    <a href="#">{{popular_destination.heading}}</a>
                   </h3>
 
                   <p class="card-text">
-                    Fusce hic augue velit wisi ips quibusdam pariatur, iusto.
+                    {{popular_destination.description}}
                   </p>
 
                 </div>
 
               </div>
             </li>
-
-            <li>
-              <div class="popular-card">
-
-                <figure class="card-img">
-                  <img src={% static "/assets/images/popular-2.jpg" %} alt="Burj khalifa, dubai" loading="lazy">
-                </figure>
-
-                <div class="card-content">
-
-                  <div class="card-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                  </div>
-
-                  <p class="card-subtitle">
-                    <a href="#">Dubai</a>
-                  </p>
-
-                  <h3 class="h3 card-title">
-                    <a href="#">Burj khalifa</a>
-                  </h3>
-
-                  <p class="card-text">
-                    Fusce hic augue velit wisi ips quibusdam pariatur, iusto.
-                  </p>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="popular-card">
-
-                <figure class="card-img">
-                  <img src={% static "/assets/images/popular-3.jpg" %} alt="Kyoto temple, japan" loading="lazy">
-                </figure>
-
-                <div class="card-content">
-
-                  <div class="card-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                  </div>
-
-                  <p class="card-subtitle">
-                    <a href="#">Japan</a>
-                  </p>
-
-                  <h3 class="h3 card-title">
-                    <a href="#">Kyoto temple</a>
-                  </h3>
-
-                  <p class="card-text">
-                    Fusce hic augue velit wisi ips quibusdam pariatur, iusto.
-                  </p>
-
-                </div>
-
-              </div>
-            </li>
+            {% endfor %}
 
           </ul>
 
@@ -331,20 +266,20 @@
 
           <ul class="package-list">
 
+            {% for packages_object in packages_objects %}
             <li>
               <div class="package-card">
 
                 <figure class="card-banner">
-                  <img src={% static "/assets/images/packege-1.jpg" %} alt="Experience The Great Holiday On Beach" loading="lazy">
+                  <img src={{packages_object.image.url}} alt="Experience The Great Holiday On Beach" loading="lazy">
                 </figure>
 
                 <div class="card-content">
 
-                  <h3 class="h3 card-title">Experience The Great Holiday On Beach</h3>
+                  <h3 class="h3 card-title">{{packages_object.heading}}</h3>
 
                   <p class="card-text">
-                    Laoreet, voluptatum nihil dolor esse quaerat mattis explicabo maiores, est aliquet porttitor! Eaque,
-                    cras, aspernatur.
+                   {{packages_object.description}}
                   </p>
 
                   <ul class="card-meta-list">
@@ -353,7 +288,7 @@
                       <div class="meta-box">
                         <ion-icon name="time"></ion-icon>
 
-                        <p class="text">7D/6N</p>
+                        <p class="text">{{packages_object.days_nights}}</p>
                       </div>
                     </li>
 
@@ -361,7 +296,7 @@
                       <div class="meta-box">
                         <ion-icon name="people"></ion-icon>
 
-                        <p class="text">pax: 10</p>
+                        <p class="text">pax: {{packages_object.pax}}</p>
                       </div>
                     </li>
 
@@ -369,7 +304,7 @@
                       <div class="meta-box">
                         <ion-icon name="location"></ion-icon>
 
-                        <p class="text">Malaysia</p>
+                        <p class="text">{{packages_object.city}}</p>
                       </div>
                     </li>
 
@@ -381,20 +316,22 @@
 
                   <div class="wrapper">
 
-                    <p class="reviews">(25 reviews)</p>
+                    <p class="reviews">({{packages_object.review_count}} reviews)</p>
 
                     <div class="card-rating">
+                      {% if packages_object.stars == 5 %}
                       <ion-icon name="star"></ion-icon>
                       <ion-icon name="star"></ion-icon>
                       <ion-icon name="star"></ion-icon>
                       <ion-icon name="star"></ion-icon>
                       <ion-icon name="star"></ion-icon>
+                      {% endif %}
                     </div>
 
                   </div>
 
                   <p class="price">
-                    $750
+                    ₹{{packages_object.price}}
                     <span>/ per person</span>
                   </p>
 
@@ -404,155 +341,7 @@
 
               </div>
             </li>
-
-            <li>
-              <div class="package-card">
-
-                <figure class="card-banner">
-                  <img src={% static "/assets/images/packege-2.jpg" %} alt="Summer Holiday To The Oxolotan River" loading="lazy">
-                </figure>
-
-                <div class="card-content">
-
-                  <h3 class="h3 card-title">Summer Holiday To The Oxolotan River</h3>
-
-                  <p class="card-text">
-                    Laoreet, voluptatum nihil dolor esse quaerat mattis explicabo maiores, est aliquet porttitor! Eaque,
-                    cras, aspernatur.
-                  </p>
-
-                  <ul class="card-meta-list">
-
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="time"></ion-icon>
-
-                        <p class="text">7D/6N</p>
-                      </div>
-                    </li>
-
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="people"></ion-icon>
-
-                        <p class="text">pax: 10</p>
-                      </div>
-                    </li>
-
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="location"></ion-icon>
-
-                        <p class="text">Malaysia</p>
-                      </div>
-                    </li>
-
-                  </ul>
-
-                </div>
-
-                <div class="card-price">
-
-                  <div class="wrapper">
-
-                    <p class="reviews">(20 reviews)</p>
-
-                    <div class="card-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                    </div>
-
-                  </div>
-
-                  <p class="price">
-                    $520
-                    <span>/ per person</span>
-                  </p>
-
-                  <button class="btn btn-secondary">Book Now</button>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="package-card">
-
-                <figure class="card-banner">
-                  <img src={% static "/assets/images/packege-3.jpg" %} alt="Santorini Island's Weekend Vacation" loading="lazy">
-                </figure>
-
-                <div class="card-content">
-
-                  <h3 class="h3 card-title">Santorini Island's Weekend Vacation</h3>
-
-                  <p class="card-text">
-                    Laoreet, voluptatum nihil dolor esse quaerat mattis explicabo maiores, est aliquet porttitor! Eaque,
-                    cras, aspernatur.
-                  </p>
-
-                  <ul class="card-meta-list">
-
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="time"></ion-icon>
-
-                        <p class="text">7D/6N</p>
-                      </div>
-                    </li>
-
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="people"></ion-icon>
-
-                        <p class="text">pax: 10</p>
-                      </div>
-                    </li>
-
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="location"></ion-icon>
-
-                        <p class="text">Malaysia</p>
-                      </div>
-                    </li>
-
-                  </ul>
-
-                </div>
-
-                <div class="card-price">
-
-                  <div class="wrapper">
-
-                    <p class="reviews">(40 reviews)</p>
-
-                    <div class="card-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                    </div>
-
-                  </div>
-
-                  <p class="price">
-                    $660
-                    <span>/ per person</span>
-                  </p>
-
-                  <button class="btn btn-secondary">Book Now</button>
-
-                </div>
-
-              </div>
-            </li>
-
+            {% endfor %}
           </ul>
 
         </div>
@@ -581,35 +370,13 @@
 
           <ul class="gallery-list">
 
+            {% for Photo_gallery_object in Photo_gallery_objects %}
             <li class="gallery-item">
               <figure class="gallery-image">
-                <img src={% static "/assets/images/gallery-1.jpg" %} alt="Gallery image">
+                <img src={{Photo_gallery_object.images.url}} alt="Gallery image">
               </figure>
             </li>
-
-            <li class="gallery-item">
-              <figure class="gallery-image">
-                <img src={% static "/assets/images/gallery-2.jpg" %} alt="Gallery image">
-              </figure>
-            </li>
-
-            <li class="gallery-item">
-              <figure class="gallery-image">
-                <img src={% static "/assets/images/gallery-3.jpg" %} alt="Gallery image">
-              </figure>
-            </li>
-
-            <li class="gallery-item">
-              <figure class="gallery-image">
-                <img src={% static "/assets/images/gallery-4.jpg" %} alt="Gallery image">
-              </figure>
-            </li>
-
-            <li class="gallery-item">
-              <figure class="gallery-image">
-                <img src={% static "/assets/images/gallery-5.jpg" %} alt="Gallery image">
-              </figure>
-            </li>
+            {% endfor %}
 
           </ul>
 
@@ -629,14 +396,13 @@
 
           <div class="cta-content">
             <p class="section-subtitle">Call To Action</p>
-
-            <h2 class="h2 section-title">Ready For Unforgatable Travel. Remember Us!</h2>
+            {% for call_to_action_objects in call_to_action_object %}
+            <h2 class="h2 section-title">{{call_to_action_objects.heading}}</h2>
 
             <p class="section-text">
-              Fusce hic augue velit wisi quibusdam pariatur, iusto primis, nec nemo, rutrum. Vestibulum cumque
-              laudantium. Sit ornare
-              mollitia tenetur, aptent.
+              {{call_to_action_objects.sub_heading}}
             </p>
+            {% endfor %}
           </div>
 
           <button class="btn btn-secondary">Contact Us !</button>
@@ -665,11 +431,9 @@
           <a href="#" class="logo">
             <img src={% static "/assets/images/originallogo.svg" %} alt="Tourly logo" style="width: 60px; height: auto;">
           </a>
-
+          {% for footer_object in footer_objects %}
           <p class="footer-text">
-            Urna ratione ante harum provident, eleifend, vulputate molestiae proin fringilla, praesentium magna conubia
-            at
-            perferendis, pretium, aenean aut ultrices.
+            {{footer_object.description}}
           </p>
 
         </div>
@@ -727,9 +491,9 @@
       <div class="container">
 
         <p class="copyright">
-          &copy; 2022 <a href="">codewithsadee</a>. All rights reserved
+          &copy; {{footer_object.date}} <a href="">codewithsadee</a>. All rights reserved
         </p>
-
+        {% endfor %}
         <ul class="footer-bottom-list">
 
           <li>
